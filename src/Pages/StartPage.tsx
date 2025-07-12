@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import jellySvg from "../assets/images/jelly.svg"; // or relative path like '../../assets/images/jelly.svg'
 import Iridescence from "../Components/Background/Iridescence";
-
+import "./LiquidGlass.css"; // Ensure you have the styles for the jelly and other elements
 const StartPage: React.FC = () => {
   const whatRef = useRef<HTMLSpanElement>(null);
   const areYouRef = useRef<HTMLSpanElement>(null);
@@ -105,40 +105,13 @@ const StartPage: React.FC = () => {
       // "-=0.4" // <-- Start the jelly wobble while the text is still sliding in (overlapping slightly)
     );
 
-    const words = lineRef.current?.querySelectorAll("span");
+    // ...existing code...
 
-    // Start words animation sooner: reduce overlap time here (e.g. "-=0.2" instead of "-=0.8")
+    const words = lineRef.current?.querySelectorAll("span");
     tl.addLabel("wordsStart", "-=0.5");
 
-    words.forEach((word) => {
-      if (word.classList.contains("true-word")) {
-        // More dramatic animation for "true"
-        tl.to(
-          word,
-          {
-            opacity: 1,
-            y: 0,
-            scale: 2,
-            rotation: 15,
-            duration: 0.4,
-            color: "#ff4081", // pink
-            fontWeight: "bold", // or 700
-            textDecoration: "underline",
-            ease: "back.out(4)",
-          },
-          "wordsStart+=" + Array.from(words).indexOf(word) * 0.15
-        ).to(
-          word,
-          {
-            scale: 1,
-            rotation: 0,
-            duration: 0.5,
-            ease: "elastic.out(1, 0.6)",
-          },
-          ">"
-        );
-      } else {
-        // Normal fade + slide for other words
+    if (words) {
+      words.forEach((word, i) => {
         tl.to(
           word,
           {
@@ -148,10 +121,10 @@ const StartPage: React.FC = () => {
             duration: 0.4,
             ease: "power2.out",
           },
-          "wordsStart+=" + Array.from(words).indexOf(word) * 0.15
+          "wordsStart+=" + i * 0.15
         );
-      }
-    });
+      });
+    }
 
     tl.from(buttonRef.current, {
       scale: 0.4,
@@ -166,7 +139,7 @@ const StartPage: React.FC = () => {
   return (
     <div>
       <Iridescence
-        color={[1, 1, 0.99]}
+        color={[1, 1, 0.9]}
         mouseReact={true}
         amplitude={1}
         speed={0.3}
@@ -223,7 +196,7 @@ const StartPage: React.FC = () => {
             className="jelly"
             style={{
               fontFamily: "GummyBear",
-              color: "#ff69b4",
+              color: "#1f1f1f",
               fontSize: "2.6rem",
               // display: "inline-block",
             }}
@@ -271,27 +244,104 @@ const StartPage: React.FC = () => {
         </h2>
 
         {/* Pop-in Button */}
-        <button
-          ref={buttonRef}
-          className="button"
-          style={{
-            padding: "14px 36px",
-            fontSize: "1.1rem",
-            fontWeight: 600,
-            color: "#fff",
-            background: "#ff69b4",
-            border: "none",
-            borderRadius: 8,
-            cursor: "pointer",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-            transformOrigin: "center",
-          }}
-          onClick={() => {
-            // TODO: handle start quiz
-          }}
-        >
-          Start Quiz
-        </button>
+        <div>
+          {/* <Iridescence
+        color={[1, 1, 0.99]}
+        mouseReact={true}
+        amplitude={1}
+        speed={0.5}
+      /> */}
+          <div className="wrapper">
+            {/* <a href="https://x.com/lucasromerodb">
+              <div className="liquidGlass-wrapper dock">
+                <div className="liquidGlass-effect"></div>
+                <div className="liquidGlass-tint"></div>
+                <div className="liquidGlass-shine"></div>
+                <div className="liquidGlass-text">
+                  <div className="dock">
+                    <text style={{ color: "white" }}>Start Quiz</text>
+                  </div>
+                </div>
+              </div>
+            </a> */}
+
+            <a ref={buttonRef} href="https://aerolab.co">
+              <div className="liquidGlass-wrapper button">
+                <div className="liquidGlass-effect"></div>
+                <div className="liquidGlass-tint"></div>
+                <div className="liquidGlass-shine"></div>
+                <div className="liquidGlass-text">
+                  <text style={{ color: "white" }}>Start Quiz</text>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <svg style={{ display: "none" }}>
+            <filter
+              id="glass-distortion"
+              x="0%"
+              y="0%"
+              width="100%"
+              height="100%"
+              filterUnits="objectBoundingBox"
+            >
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.01 0.01"
+                numOctaves="1"
+                seed="5"
+                result="turbulence"
+              />
+
+              <feComponentTransfer in="turbulence" result="mapped">
+                <feFuncR
+                  type="gamma"
+                  amplitude="1"
+                  exponent="10"
+                  offset="0.5"
+                />
+                <feFuncG type="gamma" amplitude="0" exponent="1" offset="0" />
+                <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
+              </feComponentTransfer>
+
+              <feGaussianBlur
+                in="turbulence"
+                stdDeviation="3"
+                result="softMap"
+              />
+
+              <feSpecularLighting
+                in="softMap"
+                surfaceScale="5"
+                specularConstant="1"
+                specularExponent="100"
+                lighting-color="white"
+                result="specLight"
+              >
+                <fePointLight x="-200" y="-200" z="300" />
+              </feSpecularLighting>
+
+              <feComposite
+                in="specLight"
+                operator="arithmetic"
+                k1="0"
+                k2="1"
+                k3="1"
+                k4="0"
+                result="litImage"
+              />
+
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="softMap"
+                scale="150"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+          </svg>
+        </div>
       </div>
     </div>
   );

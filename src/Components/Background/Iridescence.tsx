@@ -113,19 +113,28 @@ export default function Iridescence({
     function update(t: number) {
       animateId = requestAnimationFrame(update);
       program.uniforms.uTime.value = t * 0.001;
+
+      const smoothing = 0.01; // Lower = smoother, try 0.05–0.1
+      mousePos.current.x += (targetMouse.x - mousePos.current.x) * smoothing;
+      mousePos.current.y += (targetMouse.y - mousePos.current.y) * smoothing;
+
+      program.uniforms.uMouse.value[0] = mousePos.current.x;
+      program.uniforms.uMouse.value[1] = mousePos.current.y;
+
       renderer.render({ scene: mesh });
     }
     animateId = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
 
+    let targetMouse = { x: 0.5, y: 0.5 }; // Target mouse position
+
     function handleMouseMove(e: MouseEvent) {
       const rect = ctn.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
       const y = 1.0 - (e.clientY - rect.top) / rect.height;
-      mousePos.current = { x, y };
-      program.uniforms.uMouse.value[0] = x;
-      program.uniforms.uMouse.value[1] = y;
+      targetMouse = { x, y }; // Only update target, not directly apply
     }
+
     if (mouseReact) {
       ctn.addEventListener("mousemove", handleMouseMove);
     }

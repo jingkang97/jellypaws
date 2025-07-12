@@ -6,5 +6,5 @@
   height: 100%;
   /* z-index: -1; */
   overflow: hidden;
-  filter: blur(40px);
+  filter: brightness(0.93) blur(2px) contrast(0.95); /* ⬅️ Darker, softer */
 }
