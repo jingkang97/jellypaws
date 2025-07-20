@@ -1,0 +1,114 @@
+{
+  "Thinker": {
+    "title": "The Thinker Jelly",
+    "flavor": "Matcha",
+    "description": [
+      "Deeply empathetic",
+      "Calm and contemplative",
+      "Daydreams with a purpose",
+      "Guided by personal values",
+      "Loyal to a meaningful cause"
+    ],
+    "strengths": [
+      "Just gets how people feel",
+      "Care about doing the right thing",
+      "Notices things that others miss"
+    ],
+    "weaknesses": [
+      "Gets emotionally drained easily",
+      "Don’t open up much",
+      "Overthinks... like, everything"
+    ],
+    "stats": {
+      "sweetness": 7,
+      "firmness": 8,
+      "healthRating": 9
+    },
+    "mostCompatible": ["Beancurd", "Strawberry"],
+    "leastCompatible": ["Milktea", "Lychee Fizz"]
+  },
+  "Adventurer": {
+    "title": "The Adventurer Jelly",
+    "flavor": "Spicy Chili",
+    "description": [
+      "Bold and spontaneous",
+      "Thrives on excitement and chaos",
+      "Loves taking risks",
+      "Unpredictable and passionate",
+      "Always up for a challenge"
+    ],
+    "strengths": [
+      "Fearless in facing new experiences",
+      "Energetic and inspiring",
+      "Quick problem solver"
+    ],
+    "weaknesses": [
+      "Sometimes reckless",
+      "Can be impatient",
+      "Easily bored with routine"
+    ],
+    "stats": {
+      "sweetness": 5,
+      "firmness": 7,
+      "healthRating": 6
+    },
+    "mostCompatible": ["Lychee Fizz", "Mango"],
+    "leastCompatible": ["Beancurd", "Green Tea"]
+  },
+  "Introvert": {
+    "title": "The Introvert Jelly",
+    "flavor": "Honeydew",
+    "description": [
+      "Peaceful and quiet",
+      "Enjoys solitude and reflection",
+      "Thoughtful and introspective",
+      "Patient and calm",
+      "Deeply loyal to close friends"
+    ],
+    "strengths": [
+      "Excellent listener",
+      "Highly observant",
+      "Calm under pressure"
+    ],
+    "weaknesses": [
+      "Can be shy or reserved",
+      "May avoid confrontation",
+      "Needs plenty of alone time"
+    ],
+    "stats": {
+      "sweetness": 8,
+      "firmness": 6,
+      "healthRating": 8
+    },
+    "mostCompatible": ["Strawberry", "Green Tea"],
+    "leastCompatible": ["Spicy Chili", "Lychee Fizz"]
+  },
+  "Extrovert": {
+    "title": "The Extrovert Jelly",
+    "flavor": "Strawberry",
+    "description": [
+      "Outgoing and energetic",
+      "Loves socializing and sharing joy",
+      "Optimistic and cheerful",
+      "Brings energy to every room",
+      "Connects easily with others"
+    ],
+    "strengths": [
+      "Great at motivating others",
+      "Excellent communicator",
+      "Adaptable and spontaneous"
+    ],
+    "weaknesses": [
+      "Sometimes distractible",
+      "May struggle with downtime",
+      "Can be impulsive"
+    ],
+    "stats": {
+      "sweetness": 9,
+      "firmness": 5,
+      "healthRating": 7
+    },
+    "mostCompatible": ["Honeydew", "Mango"],
+    "leastCompatible": ["Matcha", "Beancurd"]
+  }
+}

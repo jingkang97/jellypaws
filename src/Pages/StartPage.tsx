@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import jellySvg from "../assets/images/jelly.svg"; // or relative path like '../../assets/images/jelly.svg'
@@ -11,6 +12,12 @@ const StartPage: React.FC = () => {
   const lineRef = useRef<HTMLSpanElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const jellyImgRef = useRef<HTMLImageElement>(null);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/quiz");
+  };
   useGSAP(() => {
     const tl = gsap.timeline();
 
@@ -265,7 +272,12 @@ const StartPage: React.FC = () => {
               </div>
             </a> */}
 
-            <a ref={buttonRef} href="https://aerolab.co">
+            <button
+              ref={buttonRef}
+              onClick={handleClick}
+              type="button"
+              style={{ all: "unset", cursor: "pointer" }}
+            >
               <div className="liquidGlass-wrapper button">
                 <div className="liquidGlass-effect"></div>
                 <div className="liquidGlass-tint"></div>
@@ -274,7 +286,7 @@ const StartPage: React.FC = () => {
                   <text style={{ color: "white" }}>Start Quiz</text>
                 </div>
               </div>
-            </a>
+            </button>
           </div>
 
           <svg style={{ display: "none" }}>

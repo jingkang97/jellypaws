@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "question": "You wake up in a quiet forest clearing. A glowing map appears in front of you. What do you do?",
+    "options": [
+      { "text": "Follow the path immediately.", "type": "Adventurer" },
+      { "text": "Study the map carefully.", "type": "Thinker" },
+      { "text": "Sit and enjoy the morning light first.", "type": "Introvert" },
+      {
+        "text": "Look around to see if anyone else is nearby.",
+        "type": "Extrovert"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "You come across a fork in the road. One path is misty and mysterious. The other is wide and sunny. A third leads into a dark cave. A fourth has music echoing from it.",
+    "options": [
+      { "text": "Take the misty path — curiosity calls.", "type": "Thinker" },
+      {
+        "text": "Choose the dark cave — thrill is life.",
+        "type": "Adventurer"
+      },
+      { "text": "Pick the sunny road — calm is peace.", "type": "Introvert" },
+      {
+        "text": "Head toward the music — there might be friends!",
+        "type": "Extrovert"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "A stranger offers you an artifact. “It reflects who you are,” they say. You can only choose one.",
+    "options": [
+      { "text": "A glowing compass.", "type": "Thinker" },
+      { "text": "A pair of bouncing boots.", "type": "Adventurer" },
+      { "text": "A pocket-sized zen garden.", "type": "Introvert" },
+      {
+        "text": "A magical speaker that plays party music.",
+        "type": "Extrovert"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Night falls. You need to rest. There’s a treehouse, a hammock by the river, a glowing cave, and a communal campsite.",
+    "options": [
+      { "text": "Treehouse — solid and above ground.", "type": "Thinker" },
+      { "text": "Cave — mysterious and sheltered.", "type": "Adventurer" },
+      { "text": "Hammock — peaceful and isolated.", "type": "Introvert" },
+      { "text": "Campsite — cozy and full of chatter.", "type": "Extrovert" }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "You meet three other jellies arguing about which route to take. They ask for your opinion.",
+    "options": [
+      { "text": "Suggest splitting up and gathering data.", "type": "Thinker" },
+      { "text": "Lead the way without hesitation.", "type": "Adventurer" },
+      {
+        "text": "Offer to stay behind and wait things out.",
+        "type": "Introvert"
+      },
+      {
+        "text": "Ask everyone to share their thoughts in a circle.",
+        "type": "Extrovert"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "A challenge appears: cross a river. There’s a fallen log, a zipline, a ferry, or you can wait for someone else.",
+    "options": [
+      { "text": "Zipline across!", "type": "Adventurer" },
+      { "text": "Use the ferry — stable and safe.", "type": "Thinker" },
+      { "text": "Wait for someone — no rush.", "type": "Introvert" },
+      {
+        "text": "Shout to attract help — maybe someone will join.",
+        "type": "Extrovert"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "You enter a glowing glade where a spirit asks: “What’s most important to you?”",
+    "options": [
+      { "text": "Understanding the truth of the world.", "type": "Thinker" },
+      { "text": "Living life to the fullest.", "type": "Adventurer" },
+      { "text": "Finding peace and quiet.", "type": "Introvert" },
+      { "text": "Being with others and sharing joy.", "type": "Extrovert" }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "A creature is blocking your path. It doesn’t look aggressive, but it won’t let you pass.",
+    "options": [
+      { "text": "Try to understand what it wants.", "type": "Thinker" },
+      { "text": "Challenge it to a jelly duel.", "type": "Adventurer" },
+      { "text": "Wait and observe from afar.", "type": "Introvert" },
+      { "text": "Talk to it and try to befriend it.", "type": "Extrovert" }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "A magical mirror shows your true self. But only briefly — what do you catch a glimpse of?",
+    "options": [
+      { "text": "A glowing constellation.", "type": "Thinker" },
+      { "text": "A wildfire racing through a canyon.", "type": "Adventurer" },
+      { "text": "A candle glowing in the dark.", "type": "Introvert" },
+      { "text": "A disco ball spinning among friends.", "type": "Extrovert" }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "At the end of your journey, a final choice appears: a door to your new jelly life. Which door do you open?",
+    "options": [
+      { "text": "A quiet library beneath the stars.", "type": "Thinker" },
+      { "text": "A volcano-top hangout.", "type": "Adventurer" },
+      { "text": "A cozy cave with a cup of tea.", "type": "Introvert" },
+      { "text": "A rooftop garden party.", "type": "Extrovert" }
+    ]
+  }
+]
