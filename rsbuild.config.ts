@@ -4,6 +4,8 @@ import { pluginReact } from "@rsbuild/plugin-react";
 export default defineConfig({
   plugins: [pluginReact()],
   output: {
-    assetPrefix: "/jellypaws/",
+    distPath: {
+      root: "/jellypaws/",
+    },
   },
 });

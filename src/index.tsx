@@ -7,7 +7,7 @@ if (rootEl) {
   const root = ReactDOM.createRoot(rootEl);
   root.render(
     <React.StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename="/jellypaws">
         <App />
       </BrowserRouter>
     </React.StrictMode>
