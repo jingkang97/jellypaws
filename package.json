@@ -8,7 +8,7 @@
     "build": "rsbuild build",
     "dev": "rsbuild dev --open",
     "preview": "rsbuild preview",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
