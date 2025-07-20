@@ -5,7 +5,8 @@ export default defineConfig({
   plugins: [pluginReact()],
   output: {
     distPath: {
-      root: "/jellypaws/",
+      root: "dist", // Use a relative path
     },
+    assetPrefix: "/jellypaws/", // This sets the public path for assets
   },
 });
