@@ -1,0 +1,51 @@
+# ----------------------------------
+# Local / System
+# ----------------------------------
+.DS_Store
+*.local
+*.log*
+*.tmp
+
+# ----------------------------------
+# Dependencies
+# ----------------------------------
+node_modules/
+
+# ----------------------------------
+# Build outputs
+# ----------------------------------
+dist/
+temp/
+.cache/
+.rsbuild-cache/    # optional but recommended
+rspack-stats.json  # if rspack profiling/stat dumps are generated
+
+# ----------------------------------
+# Rspack / Rsbuild profiling
+# ----------------------------------
+.rspack-profile-*/
+
+# ----------------------------------
+# TypeScript
+# ----------------------------------
+*.tsbuildinfo
+
+# ----------------------------------
+# Env files
+# ----------------------------------
+.env
+.env.local
+.env.*.local
+
+# ----------------------------------
+# IDE / Editor
+# ----------------------------------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# ----------------------------------
+# Tests
+# ----------------------------------
+coverage/
+
