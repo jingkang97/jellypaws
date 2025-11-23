@@ -25,7 +25,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
   backgroundColor = "transparent",
   wireframes = false,
   gravity = 1,
-  mouseConstraintStiffness = 0.2,
+  mouseConstraintStiffness = 0.05,
   containerPadding = 16,
   ballMax = 24,
 }) => {
@@ -92,42 +92,6 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
         wireframes,
       },
     });
-
-    // ---- circular ring (use overlapping static circles for a seam-free wall) ----
-    // create a circular boundary made from short static rectangles (no gaps)
-    // const createCircularBoundaryRectangles = (
-    //   cx: number,
-    //   cy: number,
-    //   radius: number,
-    //   segments = 100,
-    //   thicknessFactor = 1,
-    //   angleOffset = 0
-    // ) => {
-    //   const bodies: any[] = [];
-    //   const thetaStep = (Math.PI * 2) / segments;
-    //   const thickness = Math.max(12, radius * thicknessFactor);
-    //   // chord length between adjacent vertices on the circle
-    //   const chord = 2 * radius * Math.sin(Math.PI / segments);
-    //   // slightly extend each rectangle to overlap neighbors and avoid seams
-    //   const segLength = Math.max(8, chord * 1.08);
-
-    //   for (let i = 0; i < segments; i++) {
-    //     const theta = angleOffset + i * thetaStep;
-    //     const x = cx + Math.cos(theta) * radius;
-    //     const y = cy + Math.sin(theta) * radius;
-    //     const rect = Bodies.rectangle(x, y, segLength, thickness, {
-    //       isStatic: true,
-    //       angle: theta,
-    //       render: {
-    //         fillStyle: "opaque",
-    //         strokeStyle: "rgba(0,0,0,0.12)",
-    //         lineWidth: 1,
-    //       },
-    //     });
-    //     bodies.push(rect);
-    //   }
-    //   return bodies;
-    // };
 
     function createCircularBoundaryRectangles(
       x: number,
