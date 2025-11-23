@@ -1,7 +1,15 @@
 import { useRef, useState, useEffect } from "react";
 import Matter from "matter-js";
 import "./FallingGachapon.css";
+import { Body as MatterBody, Bodies } from "matter-js";
 
+import type { IChamferableBodyDefinition } from "matter-js";
+
+interface CircularBoundaryOptions extends IChamferableBodyDefinition {
+  width?: number;
+  extraLength?: number;
+  initialRotation?: number;
+}
 interface FallingGachaponProps {
   trigger?: "auto" | "scroll" | "click" | "hover";
   backgroundColor?: string;
@@ -86,56 +94,106 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     });
 
     // ---- circular ring (use overlapping static circles for a seam-free wall) ----
-    const createCircularRingWithCircles = (
-      cx: number,
-      cy: number,
+    // create a circular boundary made from short static rectangles (no gaps)
+    // const createCircularBoundaryRectangles = (
+    //   cx: number,
+    //   cy: number,
+    //   radius: number,
+    //   segments = 100,
+    //   thicknessFactor = 1,
+    //   angleOffset = 0
+    // ) => {
+    //   const bodies: any[] = [];
+    //   const thetaStep = (Math.PI * 2) / segments;
+    //   const thickness = Math.max(12, radius * thicknessFactor);
+    //   // chord length between adjacent vertices on the circle
+    //   const chord = 2 * radius * Math.sin(Math.PI / segments);
+    //   // slightly extend each rectangle to overlap neighbors and avoid seams
+    //   const segLength = Math.max(8, chord * 1.08);
+
+    //   for (let i = 0; i < segments; i++) {
+    //     const theta = angleOffset + i * thetaStep;
+    //     const x = cx + Math.cos(theta) * radius;
+    //     const y = cy + Math.sin(theta) * radius;
+    //     const rect = Bodies.rectangle(x, y, segLength, thickness, {
+    //       isStatic: true,
+    //       angle: theta,
+    //       render: {
+    //         fillStyle: "opaque",
+    //         strokeStyle: "rgba(0,0,0,0.12)",
+    //         lineWidth: 1,
+    //       },
+    //     });
+    //     bodies.push(rect);
+    //   }
+    //   return bodies;
+    // };
+
+    function createCircularBoundaryRectangles(
+      x: number,
+      y: number,
+      sides: number,
       radius: number,
-      segments = 64,
-      thicknessFactor = 0.06,
-      angleOffset = 0
-    ) => {
-      const bodies: any[] = [];
-      const thetaStep = (Math.PI * 2) / segments;
-      const thickness = Math.max(12, radius * thicknessFactor);
-      for (let i = 0; i < segments; i++) {
-        const theta = angleOffset + i * thetaStep;
-        const x = cx + Math.cos(theta) * radius;
-        const y = cy + Math.sin(theta) * radius;
-        const circle = Bodies.circle(x, y, thickness / 2, {
-          isStatic: true,
-          render: {
-            fillStyle: "transparent",
-            strokeStyle: "rgba(0,0,0,0.12)",
-            lineWidth: 1,
-          },
+      options: CircularBoundaryOptions = {}
+    ): MatterBody {
+      const {
+        width = 20,
+        extraLength = 1.15,
+        initialRotation = 0,
+        ...bodyOptions
+      } = options;
+
+      const theta = (2 * Math.PI) / sides;
+      const sideLength = ((2 * radius * theta) / 2) * extraLength;
+
+      const parts: MatterBody[] = [];
+
+      for (let i = 0; i < sides; i++) {
+        const part = Bodies.rectangle(0, 0, sideLength, width);
+
+        MatterBody.rotate(part, i * theta);
+        MatterBody.translate(part, {
+          x: radius * Math.sin(i * theta),
+          y: -radius * Math.cos(i * theta),
         });
-        bodies.push(circle);
+
+        parts.push(part);
       }
-      return bodies;
-    };
+
+      const ret = MatterBody.create(bodyOptions);
+      MatterBody.setParts(ret, parts);
+
+      if (initialRotation) {
+        MatterBody.rotate(ret, initialRotation);
+      }
+
+      MatterBody.translate(ret, { x, y });
+
+      return ret;
+    }
 
     const cx = width / 2;
     const cy = height / 2;
     const ringRadius = Math.min(width, height) / 2 - containerPadding;
     const ringSegments = Math.max(32, Math.floor(Math.min(width, height) / 20));
 
-    const outerRing = createCircularRingWithCircles(
+    const ring = createCircularBoundaryRectangles(
       cx,
       cy,
-      ringRadius,
-      Math.max(48, ringSegments),
-      0.06,
-      0
+      ringSegments, // how many segments
+      ringRadius, // radius
+      {
+        width: 20,
+        extraLength: 1.15,
+        initialRotation: 0,
+        isStatic: true,
+        render: {
+          fillStyle: "opaque",
+          // strokeStyle: "rgba(0,0,0,0.12)",
+          lineWidth: 1,
+        },
+      }
     );
-    const innerRing = createCircularRingWithCircles(
-      cx,
-      cy,
-      Math.max(8, ringRadius - 12),
-      Math.max(40, ringSegments),
-      0.05,
-      Math.PI / ringSegments
-    );
-    const ringBodies = [...outerRing, ...innerRing];
 
     // extra rectangular fence to be extra-safe
     const fencePadding = 8;
@@ -175,7 +233,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     // use fixed palette from public/gachapon/ and create ~6 balls (random colours)
     const palette = ["blue.png", "green.png", "pink.png", "yellow.png"];
     // increase cap here to allow more balls (use ballMax prop to control)
-    const ballCount = Math.min(ballMax, 8);
+    const ballCount = Math.min(ballMax, 10);
     const filenames = Array.from(
       { length: ballCount },
       () => palette[Math.floor(Math.random() * palette.length)]
@@ -243,7 +301,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     render.mouse = mouse;
 
     World.add(engine.world, [
-      ...ringBodies,
+      ring,
       ...fenceBodies,
       mouseConstraint,
       ...ballBodies,

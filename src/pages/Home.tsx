@@ -7,7 +7,7 @@ const Home = () => {
       <div style={{ height: "50vh", width: "100vw" }}>
         <FallingGachapon
           trigger="hover"
-          backgroundColor="transparent"
+          backgroundColor="tranredsparent"
           wireframes={false}
           gravity={0.5}
           mouseConstraintStiffness={0.9}
