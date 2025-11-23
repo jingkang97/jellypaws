@@ -25,7 +25,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
   backgroundColor = "transparent",
   wireframes = false,
   gravity = 1,
-  mouseConstraintStiffness = 0.05,
+  mouseConstraintStiffness = 0.02,
   containerPadding = 16,
   ballMax = 24,
 }) => {
@@ -77,7 +77,6 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     if (width <= 0 || height <= 0) return;
 
     const engine = Engine.create();
-    // increase solver iterations to reduce tunneling
     engine.positionIterations = 10;
     engine.velocityIterations = 8;
     engine.world.gravity.y = gravity;
@@ -93,73 +92,57 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
       },
     });
 
-    function createCircularBoundaryRectangles(
+    // --- Create circular boundary ring ---
+    function createCircularBoundaryRing(
       x: number,
       y: number,
-      sides: number,
       radius: number,
       options: CircularBoundaryOptions = {}
-    ): MatterBody {
+    ): MatterBody[] {
       const {
         width = 20,
         extraLength = 1.15,
+        sides = 64,
         initialRotation = 0,
-        ...bodyOptions
+        isStatic = true,
       } = options;
 
-      const theta = (2 * Math.PI) / sides;
-      const sideLength = ((2 * radius * theta) / 2) * extraLength;
+      const thetaStep = (2 * Math.PI) / sides;
+      const chord = 2 * radius * Math.sin(Math.PI / sides);
+      const segLength = chord * extraLength;
 
-      const parts: MatterBody[] = [];
-
+      const ringParts: MatterBody[] = [];
       for (let i = 0; i < sides; i++) {
-        const part = Bodies.rectangle(0, 0, sideLength, width);
-
-        MatterBody.rotate(part, i * theta);
-        MatterBody.translate(part, {
-          x: radius * Math.sin(i * theta),
-          y: -radius * Math.cos(i * theta),
-        });
-
-        parts.push(part);
+        const theta = i * thetaStep + initialRotation;
+        const part = Bodies.rectangle(
+          x + Math.sin(theta) * radius,
+          y - Math.cos(theta) * radius,
+          segLength,
+          width,
+          {
+            angle: theta,
+            isStatic,
+            render: { visible: false },
+          }
+        );
+        ringParts.push(part);
       }
-
-      const ret = MatterBody.create(bodyOptions);
-      MatterBody.setParts(ret, parts);
-
-      if (initialRotation) {
-        MatterBody.rotate(ret, initialRotation);
-      }
-
-      MatterBody.translate(ret, { x, y });
-
-      return ret;
+      return ringParts;
     }
 
     const cx = width / 2;
     const cy = height / 2;
     const ringRadius = Math.min(width, height) / 2 - containerPadding;
-    const ringSegments = Math.max(32, Math.floor(Math.min(width, height) / 20));
+    const ringSegments = Math.max(64, Math.floor(Math.min(width, height) / 20));
 
-    const ring = createCircularBoundaryRectangles(
-      cx,
-      cy,
-      ringSegments, // how many segments
-      ringRadius, // radius
-      {
-        width: 20,
-        extraLength: 1.15,
-        initialRotation: 0,
-        isStatic: true,
-        render: {
-          fillStyle: "opaque",
-          // strokeStyle: "rgba(0,0,0,0.12)",
-          lineWidth: 1,
-        },
-      }
-    );
+    const ringBodies = createCircularBoundaryRing(cx, cy, ringRadius, {
+      width: 20,
+      extraLength: 1.15,
+      sides: ringSegments,
+      isStatic: true,
+    });
 
-    // extra rectangular fence to be extra-safe
+    // Extra rectangular fence to be safe
     const fencePadding = 8;
     const boxThickness = Math.max(24, Math.min(64, ringRadius * 0.08));
     const fenceSpan = ringRadius * 2 + boxThickness * 2 + fencePadding * 2;
@@ -168,35 +151,33 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
       cy - ringRadius - boxThickness / 2 - fencePadding,
       fenceSpan,
       boxThickness,
-      { isStatic: true, render: { fillStyle: "transparent" } }
+      { isStatic: true, render: { visible: false } }
     );
     const bottomWall = Bodies.rectangle(
       cx,
       cy + ringRadius + boxThickness / 2 + fencePadding,
       fenceSpan,
       boxThickness,
-      { isStatic: true, render: { fillStyle: "transparent" } }
+      { isStatic: true, render: { visible: false } }
     );
     const leftWall = Bodies.rectangle(
       cx - ringRadius - boxThickness / 2 - fencePadding,
       cy,
       boxThickness,
       fenceSpan,
-      { isStatic: true, render: { fillStyle: "transparent" } }
+      { isStatic: true, render: { visible: false } }
     );
     const rightWall = Bodies.rectangle(
       cx + ringRadius + boxThickness / 2 + fencePadding,
       cy,
       boxThickness,
       fenceSpan,
-      { isStatic: true, render: { fillStyle: "transparent" } }
+      { isStatic: true, render: { visible: false } }
     );
     const fenceBodies = [topWall, bottomWall, leftWall, rightWall];
 
-    // ---- create image balls (DOM imgs) and corresponding circle bodies ----
-    // use fixed palette from public/gachapon/ and create ~6 balls (random colours)
+    // --- Create balls ---
     const palette = ["blue.png", "green.png", "pink.png", "yellow.png"];
-    // increase cap here to allow more balls (use ballMax prop to control)
     const ballCount = Math.min(ballMax, 10);
     const filenames = Array.from(
       { length: ballCount },
@@ -204,20 +185,18 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     );
 
     const ballElems: HTMLImageElement[] = [];
-    const ballBodies: any[] = [];
+    const ballBodies: MatterBody[] = [];
 
-    // compute rad: slightly larger balls (bumped values)
     const avgRadius = Math.max(
-      16, // minimum radius
+      16,
       Math.min(
-        48, // maximum radius
-        (Math.min(width, height) / (Math.sqrt(ballCount || 4) * 5)) * 1.25 // scale factor for larger balls
+        48,
+        (Math.min(width, height) / (Math.sqrt(ballCount || 4) * 5)) * 1.25
       )
     );
 
     for (let i = 0; i < ballCount; i++) {
       const name = filenames[i];
-      // images are expected in public/gachapon/<name>
       const src = `/gachapon/${name}`;
       const img = document.createElement("img");
       img.src = src;
@@ -228,10 +207,11 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
       img.style.height = `${avgRadius * 2}px`;
       img.style.borderRadius = "50%";
       img.style.objectFit = "cover";
-      img.style.pointerEvents = "none"; // let canvas mouse handle interaction
+      img.style.pointerEvents = "none";
       img.style.userSelect = "none";
       img.style.transform = "translate(-50%, -50%)";
-      // starting positions spread near top of ring
+
+      // starting positions near top of ring
       const angle = (Math.random() - 0.5) * Math.PI;
       const startR = Math.max(
         8,
@@ -244,7 +224,6 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
         restitution: 0.6,
         frictionAir: 0.02,
         friction: 0.1,
-        // hide Matter's canvas sprite (we render the image as a DOM element)
         render: { visible: false },
       });
 
@@ -253,19 +232,17 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
       containerRef.current!.appendChild(img);
     }
 
-    // use render.canvas for correct mouse coords
+    // --- Mouse constraint ---
     const mouse = Mouse.create(render.canvas);
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse,
-      constraint: {
-        stiffness: mouseConstraintStiffness,
-        render: { visible: false },
-      },
+      constraint: { stiffness: 0.05, render: { visible: false } }, // lower stiffness prevents dragging balls through walls
     });
     render.mouse = mouse;
 
+    // --- Add all bodies ---
     World.add(engine.world, [
-      ring,
+      ...ringBodies,
       ...fenceBodies,
       mouseConstraint,
       ...ballBodies,
@@ -275,7 +252,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     Runner.run(runner, engine);
     Render.run(render);
 
-    // show overlay border for the ring
+    // Overlay border for ring
     if (ringOverlayRef.current) {
       const overlay = ringOverlayRef.current;
       const size = ringRadius * 2;
@@ -290,17 +267,15 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
       overlay.style.boxSizing = "border-box";
     }
 
-    // sync loop: position DOM imgs to match bodies
+    // Sync DOM images with physics
     let mounted = true;
     const updateLoop = () => {
       if (!mounted) return;
       for (let i = 0; i < ballBodies.length; i++) {
         const b = ballBodies[i];
         const el = ballElems[i];
-        const x = b.position.x;
-        const y = b.position.y;
-        el.style.left = `${x}px`;
-        el.style.top = `${y}px`;
+        el.style.left = `${b.position.x}px`;
+        el.style.top = `${b.position.y}px`;
         el.style.transform = `translate(-50%, -50%) rotate(${b.angle}rad)`;
       }
       requestAnimationFrame(updateLoop);
