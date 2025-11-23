@@ -114,3 +114,39 @@ button:hover {
   height: auto;
   margin: 0 auto 16px;
 }
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center horizontally */
+  justify-content: center; /* center vertically */
+  text-align: center;
+  min-height: 40vh;
+  gap: 8px;
+  padding: 20px;
+}
+
+.home .start-link {
+  text-decoration: none; /* remove underline */
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  margin-top: 16px;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+}
+
+.home .start-link:hover,
+.home .start-link:focus {
+  background-color: #0056b3;
+  outline: none;
+  text-decoration: none;
+}
+
+.home .start-link {
+  margin: 12px 0 0;
+}

@@ -5,8 +5,9 @@ const Home = () => {
     <div className="home">
       <h1>What jelly are you?</h1>
       <p>Discover your true flavour</p>
-      <Link to="/quiz">
-        <button>Start</button>
+
+      <Link to="/quiz" className="start-link" aria-label="Start quiz">
+        Start
       </Link>
     </div>
   );
