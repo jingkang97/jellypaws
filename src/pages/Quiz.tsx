@@ -24,7 +24,6 @@ const Quiz: React.FC = () => {
   };
 
   const current: Question = questions[currentQuestionIndex];
-  console.log(current);
   if (!current) return <div>Loading...</div>;
 
   return (

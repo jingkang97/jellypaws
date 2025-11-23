@@ -4,9 +4,8 @@ export interface AnswerOption {
 }
 
 export interface Question {
-  id?: number;
-  text?: string; // Optional text field
-  question?: string; // Optional question field
-  options?: AnswerOption[]; // Optional array of AnswerOption
-  answers?: AnswerOption[]; // Change to an array of AnswerOption
+  id: number;
+  question: string;
+  options: AnswerOption[];
+  answers?: AnswerOption[];
 }

@@ -10,7 +10,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   question,
   onAnswerSelected,
 }) => {
-  const prompt = question.text ?? question.question ?? "Untitled question";
+  const prompt = question.question ?? "Untitled question";
 
   // Normalize options: prefer answers (structured), fall back to options (AnswerOption[])
   const normalizedOptions: { label: string; value: string }[] =

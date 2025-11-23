@@ -10,27 +10,22 @@ const Results: React.FC = () => {
   const userAnswers = location.state?.userAnswers ?? [];
 
   const profile = useMemo(() => {
-    // count letters
     const counts: Record<string, number> = {};
     userAnswers.forEach((v) => {
       const letter = String(v).toUpperCase();
       counts[letter] = (counts[letter] || 0) + 1;
     });
 
-    // decide each dichotomy by comparing counts
     const pick = (a: string, b: string) => {
       const ca = counts[a] || 0;
       const cb = counts[b] || 0;
-      if (ca === cb) return a; // deterministic tie-breaker
+      if (ca === cb) return a;
       return ca > cb ? a : b;
     };
 
     const typeKey =
       pick("E", "I") + pick("S", "N") + pick("T", "F") + pick("J", "P");
 
-    // lookup results.json by key (e.g. "INFJ")
-    // resultsData is an object keyed by MBTI-like keys
-    // fallback to a generic object if not found
     const entry = (resultsData as any)[typeKey] ?? {
       name: "Unknown",
       summary: "No summary available.",
@@ -46,7 +41,7 @@ const Results: React.FC = () => {
 
   if (userAnswers.length === 0) {
     return (
-      <div style={{ padding: 20 }}>
+      <div style={{ padding: 20, textAlign: "center" }}>
         <h2>We have no idea what jelly are you :(</h2>
         <p>Please complete the quiz in its entirety first!</p>
         <button type="button" onClick={() => history.push("/")}>
@@ -58,12 +53,35 @@ const Results: React.FC = () => {
 
   const { key, entry } = profile;
 
+  // image is served from public/jellys/<KEY>.png — fallback to DEFAULT.png on error
+  const imgSrc = `/jellys/${key}.png`;
+
   return (
     <div className="results-page" style={{ padding: 20 }}>
       <h1>
         You are: {key} — {entry.name}
       </h1>
+
+      <img
+        src={imgSrc}
+        alt={`${entry.name} result`}
+        style={{
+          maxWidth: 420,
+          width: "100%",
+          margin: "16px auto",
+          display: "block",
+        }}
+        onError={(e) => {
+          const target = e.currentTarget as HTMLImageElement;
+          if (!target.dataset.fallback) {
+            target.dataset.fallback = "1";
+            target.src = "/jellys/DEFAULT.png";
+          }
+        }}
+      />
+
       <p>{entry.summary}</p>
+
       <section>
         <h3>Top traits</h3>
         <ul>
@@ -107,11 +125,7 @@ const Results: React.FC = () => {
         <button type="button" onClick={() => history.push("/quiz")}>
           Retake quiz
         </button>
-        <button
-          style={{ marginLeft: 8 }}
-          type="button"
-          onClick={() => history.push("/")}
-        >
+        <button type="button" onClick={() => history.push("/")}>
           Home
         </button>
       </div>

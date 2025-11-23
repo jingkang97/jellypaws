@@ -15,25 +15,10 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 
   return (
     <div className="progress-bar" aria-hidden>
-      <div
-        className="progress-bar__track"
-        style={{ background: "#eee", height: 8, borderRadius: 4 }}
-      >
-        <div
-          className="progress-bar__fill"
-          style={{
-            width: `${percent}%`,
-            height: "100%",
-            background: "#4f46e5",
-            borderRadius: 4,
-            transition: "width 200ms ease",
-          }}
-        />
+      <div className="progress-bar__track">
+        <div className="progress-bar__fill" style={{ width: `${percent}%` }} />
       </div>
-      <div
-        className="progress-bar__label"
-        style={{ marginTop: 8, fontSize: 12 }}
-      >
+      <div className="progress-bar__label">
         Question {Math.min(currentQuestionIndex + 1, totalQuestions)} /{" "}
         {totalQuestions}
       </div>
