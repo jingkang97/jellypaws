@@ -1,8 +1,20 @@
 import { Link } from "react-router-dom";
+import FallingGachapon from "../components/FallingGachapon/FallingGachapon";
 
 const Home = () => {
   return (
     <div className="home">
+      <div style={{ height: "50vh", width: "100vw" }}>
+        <FallingGachapon
+          trigger="hover"
+          backgroundColor="transparent"
+          wireframes={false}
+          gravity={0.5}
+          mouseConstraintStiffness={0.9}
+          ballMax={10}
+          containerPadding={16}
+        />
+      </div>
       <h1>What jelly are you?</h1>
       <p>Discover your true flavour</p>
 
