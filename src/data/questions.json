@@ -1,0 +1,131 @@
+[
+  {
+    "id": 1,
+    "question": "You wake in the Jelly Realm. A dozen sentient jellies gather curiously around you...",
+    "options": [
+      { "text": "Step forward and ask, “Who are you guys?”", "value": "E" },
+      {
+        "text": "Stay still and quietly observe every one of them",
+        "value": "I"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Welcome! Please proceed to the Gelatine Arena for your jelly trials",
+    "options": [
+      {
+        "text": "I need to prepare right away! What are the rules?!",
+        "value": "J"
+      },
+      { "text": "Ooo exciting! I’ll just see where this goes", "value": "P" }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Ah yes — the flying jellies! That’s how we commute here. Come, follow me!",
+    "options": [
+      { "text": "Cool! But how are they flying?", "value": "S" },
+      { "text": "I wonder where are they flying to...", "value": "N" }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "The Gelatine Arena doors swing open. A crowd of jellies claps and waves you in.",
+    "options": [
+      {
+        "text": "You wave back with a grin and stride in confidently",
+        "value": "E"
+      },
+      {
+        "text": "You give a small nod and quickly make your way inside",
+        "value": "I"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Take this magical jelly-drop. It will be your companion in the duels ahead.",
+    "options": [
+      { "text": "Examine its smell, feel, and weight", "value": "S" },
+      { "text": "Wonder what kind of power it might contain", "value": "N" }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Oh dear… Those two are arguing over their jelly-drops. One of them’s in tears..",
+    "options": [
+      { "text": "Calmly find a fair solution for both sides", "value": "T" },
+      { "text": "Comfort the crying jelly first", "value": "F" }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "A jelly approaches you, wide-eyed and asks ‘Can I switch my jelly-drop with you?’",
+    "options": [
+      {
+        "text": "Swap without hesitation — they seem to need it",
+        "value": "F"
+      },
+      { "text": "Ask why, then decide if it’s fair", "value": "T" }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "The duel is about to begin. What will you do before the first strike?",
+    "options": [
+      { "text": "Block out the noise and stay laser-focused", "value": "I" },
+      {
+        "text": "You wink at the crowd and strike a dramatic pose",
+        "value": "E"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Your opponent summons bubble bloom - a glowing orb bursting into many erratic bouncing bubbles",
+    "options": [
+      {
+        "text": "Dodge between the bubbles and counter mid-air.",
+        "value": "P"
+      },
+      {
+        "text": "Try to block the attacks with your magical fruit",
+        "value": "J"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "One of the jelly bubbles lands on your arm and crystallizes — not harmful, but painful.",
+    "options": [
+      { "text": "That was a calculated strike. Well played.", "value": "T" },
+      { "text": "Damn, that was close!", "value": "F" }
+    ]
+  },
+  {
+    "id": 11,
+    "question": "It’s your turn! Your jelly-drop is charged with magic. Where do you aim?",
+    "options": [
+      {
+        "text": "An unexpected area that might catch them off guard",
+        "value": "N"
+      },
+      {
+        "text": "The crack in your opponent’s defense - you spotted it earlier",
+        "value": "S"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "question": "Your attack lands clean and filled with purpose. The arena glows with lingering jelly magic...",
+    "options": [
+      {
+        "text": "Keeps jellywand back in your pocket — no loose ends.",
+        "value": "J"
+      },
+      { "text": "Watches what the magic becomes", "value": "P" }
+    ]
+  }
+]

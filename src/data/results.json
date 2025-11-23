@@ -1,0 +1,397 @@
+{
+  "INFJ": {
+    "name": "Matcha Jelly",
+    "summary": "Gentle, grounded and full of meaning.",
+    "traits": [
+      "Deeply empathetic",
+      "Calm and contemplative",
+      "Daydreams with a purpose",
+      "Guided by personal values",
+      "Loyal to a meaningful cause"
+    ],
+    "strengths": [
+      "Just gets how people feel",
+      "Care about doing the right thing",
+      "Notices things that others miss"
+    ],
+    "weaknesses": [
+      "Gets emotionally drained easily",
+      "Don’t open up much",
+      "Overthinks everything"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Beancurd", "Strawberry"],
+    "leastCompatible": ["Milktea", "Lychee Fizz"]
+  },
+
+  "INFP": {
+    "name": "Strawberry Jelly",
+    "summary": "Soft, squishy, and dreaming of a better world.",
+    "traits": [
+      "Gentle and idealistic",
+      "Lives in their imagination",
+      "Sensitive to vibes and moods",
+      "Feels deeply, even in silence",
+      "Cries over cute things"
+    ],
+    "strengths": [
+      "Quietly super kind",
+      "Big dreams and a soft heart",
+      "Stay true to what they believe in"
+    ],
+    "weaknesses": [
+      "Take things too personally",
+      "Gets lost in thoughts",
+      "Bad at tough conversations"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Matcha", "Butterfly Pea"],
+    "leastCompatible": ["Panna Cotta", "Chocolate"]
+  },
+
+  "ENFJ": {
+    "name": "Osmanthus Jelly",
+    "summary": "Warm heards and lead the way.",
+    "traits": [
+      "Inspires others naturally",
+      "Takes care of everyone",
+      "Emotionally fluent & expressive",
+      "Loves meaningful convos",
+      "Has a ‘mom friend’ energy"
+    ],
+    "strengths": [
+      "Makes people feel supported",
+      "Brings people together",
+      "Believes in helping others grow"
+    ],
+    "weaknesses": [
+      "Forgets to take care of myself",
+      "Overwhelmed by other’s feelings",
+      "Worry about being liked"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Strawberry", "Butterfly Pea"],
+    "leastCompatible": ["Raindrop", "Mixed Fruit"]
+  },
+
+  "ENFP": {
+    "name": "Mango Jelly",
+    "summary": "Life’s a buffet—try everything once!",
+    "traits": [
+      "Bubbly, curious, full of ideas",
+      "Easily excited (and distracted)",
+      "Values freedom & authenticity",
+      "Optimistic with a big heart",
+      "Has 99 tabs open in their brain"
+    ],
+    "strengths": [
+      "Makes people feel supported",
+      "Brings people together",
+      "Believes in helping others grow"
+    ],
+    "weaknesses": [
+      "Forgets to take care of myself",
+      "Overwhelmed by other’s feelings",
+      "Worry about being liked"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Matcha", "Butterfly Pea"],
+    "leastCompatible": ["Caramel", "Grass Jelly"]
+  },
+
+  "INTJ": {
+    "name": "Grass Jelly Jelly",
+    "summary": "Calm mind, sharp moves.",
+    "traits": [
+      "Strategic and independent",
+      "Always thinking 5 steps ahead",
+      "Values logic but feels deeply",
+      "Plans everything—even naps",
+      "Low tolerance for small talk"
+    ],
+    "strengths": [
+      "Sees patterns no one notices",
+      "Laser-focused on what matters",
+      "Doesn’t follow trends"
+    ],
+    "weaknesses": [
+      "Too blunt without meaning to",
+      "Bottle up my feelings",
+      "Gets impatient sometimes"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Strawberry", "Lychee Yakult"],
+    "leastCompatible": ["Rainbow", "Mango"]
+  },
+
+  "INTP": {
+    "name": "Mixed Fruit Jelly Jelly",
+    "summary": "Always thinking, rarely blinking.",
+    "traits": [
+      "Quiet but full of wild ideas",
+      "Loves deep questions",
+      "Gets lost in their own thoughts",
+      "Curious, clever, kind of chaotic",
+      "Has a galaxy brain"
+    ],
+    "strengths": [
+      "Talent for hidden parallels",
+      "Thinks before speaking",
+      "Loves brain puzzles"
+    ],
+    "weaknesses": [
+      "Forgets about the real world",
+      "Have commitment issues",
+      "Can seem cold even though they care"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Lychee Yakult", "Matcha"],
+    "leastCompatible": ["Pandan", "Osmanthus"]
+  },
+
+  "ENTJ": {
+    "name": "Chocolate Pudding Jelly",
+    "summary": "No time to waste—let’s build an empire.",
+    "traits": [
+      "Bold, confident, goal-oriented",
+      "Natural leader",
+      "Gets frustrated with inefficiency",
+      "Has high standards",
+      "Surprisingly soft on the inside"
+    ],
+    "strengths": [
+      "Gets things done fast",
+      "Make big plans & follow-through",
+      "Knows how to lead a team"
+    ],
+    "weaknesses": [
+      "Can be a little intense",
+      "Struggles to slow down",
+      "Can overlook hurt feelings"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Mixed Fruit", "Panna Cotta"],
+    "leastCompatible": ["Strawberry", "Butterfly Pea"]
+  },
+
+  "ENTP": {
+    "name": "Lychee Yakult Jelly",
+    "summary": "Why choose one idea when you can have twelve?",
+    "traits": [
+      "Energetic, unpredictable, fun",
+      "Thinks fast, talks faster",
+      "Gets bored easily",
+      "Loves to debate",
+      "Sees adventure in chaos"
+    ],
+    "strengths": [
+      "Quick with ideas generation",
+      "Makes people laugh and think",
+      "A sparkler in human form"
+    ],
+    "weaknesses": [
+      "Serial starter, selective finisher",
+      "Talks over people unknowingly",
+      "Chases chaos like candy"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Mixed Fruit", "Mango"],
+    "leastCompatible": ["Beancurd", "Caramel"]
+  },
+
+  "ISTJ": {
+    "name": "Caramel Custard Jelly",
+    "summary": "Duty before dessert.",
+    "traits": [
+      "Practical, responsible, quiet",
+      "Loves structure and routines",
+      "Follows rules strictly",
+      "Secretly soft but firm outside",
+      "Low-key mom-friend energy"
+    ],
+    "strengths": [
+      "Gets things done right",
+      "Organized, calm, and steady",
+      "Keeps the group grounded"
+    ],
+    "weaknesses": [
+      "Not great with surprises",
+      "Too set in their ways",
+      "Struggles to open up"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Beancurd", "Panna Cotta"],
+    "leastCompatible": ["Mango", "Lychee Yakult"]
+  },
+
+  "ISFJ": {
+    "name": "Beancurd Jelly",
+    "summary": "Human band-aid for life’s paper cuts.",
+    "traits": [
+      "Gentle and dependable",
+      "Helps behind the scenes",
+      "Often puts others first",
+      "Quiet but full of love",
+      "The ultimate comfort jelly"
+    ],
+    "strengths": [
+      "Remembers the small things",
+      "Steady, thoughtful, and kind",
+      "Creates a safe space for others"
+    ],
+    "weaknesses": [
+      "Forgets to take care of myself",
+      "Avoids conflict",
+      "Hard on myself"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Matcha", "Caramel"],
+    "leastCompatible": ["Lychee Yakult", "Bubbletea"]
+  },
+
+  "ESTJ": {
+    "name": "Panna Cotta Jelly",
+    "summary": "No fuss, just results.",
+    "traits": [
+      "Organized, direct, confident",
+      "Takes charge when needed",
+      "Values structure and hard work",
+      "Honest to a fault",
+      "Follows traditions"
+    ],
+    "strengths": [
+      "Reliable",
+      "Brings structure to chaos",
+      "No excuses, no nonsense"
+    ],
+    "weaknesses": [
+      "Too blunt",
+      "Bad at emotional stuff",
+      "Overfixates on what's “right”"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Caramel", "Chocolate"],
+    "leastCompatible": ["Strawberry", "Butterfly Pea"]
+  },
+
+  "ESFJ": {
+    "name": "Panda Coconut Jelly",
+    "summary": "Sweet, social, and here to serve looks and love.",
+    "traits": [
+      "Warm, bubbly, people-oriented",
+      "Loves planning parties",
+      "Always remembers birthdays",
+      "Loyal and thoughtful",
+      "Strong sense of duty"
+    ],
+    "strengths": [
+      "Glues the group together",
+      "Always shows up",
+      "Keeps traditions alive"
+    ],
+    "weaknesses": [
+      "Says yes too quickly",
+      "Fears criticism",
+      "Struggles with adaptability"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Butterfly Pea", "Mango"],
+    "leastCompatible": ["Mixed Fruit", "Raindrop"]
+  },
+
+  "ISTP": {
+    "name": "Raindrop Jelly",
+    "summary": "I don’t follow the rules—I test them.",
+    "traits": [
+      "Quiet, observant, super chill",
+      "Unbothered by drama",
+      "Hates micromanagement",
+      "Low-key clever",
+      "Dry humor"
+    ],
+    "strengths": [
+      "Chill under pressure",
+      "Good at hands-on tasks",
+      "Self-sufficient"
+    ],
+    "weaknesses": [
+      "Ignores danger for thrills",
+      "Struggles to express feelings",
+      "Acts before thinking"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Mixed Fruit", "Bubbletea"],
+    "leastCompatible": ["Osmanthus", "Pandan"]
+  },
+
+  "ISFP": {
+    "name": "Butterfly Pea Jelly",
+    "summary": "Feel deeply, live authentically.",
+    "traits": [
+      "Gentle, creative, full of feeling",
+      "Authentic and genuine",
+      "Expressive through art",
+      "Independent but loyal",
+      "Loves beauty and nature"
+    ],
+    "strengths": [
+      "Sees beauty everywhere",
+      "Adaptable and free-spirited",
+      "Natural creators"
+    ],
+    "weaknesses": [
+      "Struggles with assertiveness",
+      "Takes things personally",
+      "Neglects long-term planning"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Strawberry", "Pandan"],
+    "leastCompatible": ["Chocolate", "Panna Cotta"]
+  },
+
+  "ESTP": {
+    "name": "Bubbletea Jelly",
+    "summary": "Life’s short—shake things up!",
+    "traits": [
+      "Bold, energetic, action-first",
+      "Always up for adventure",
+      "Reads social cues well",
+      "Life of the party",
+      "Aura farmer"
+    ],
+    "strengths": [
+      "Brings energy everywhere",
+      "Thinks fast on their feet",
+      "Excels in crises"
+    ],
+    "weaknesses": [
+      "Rebels for fun",
+      "Avoids deep talks",
+      "Short attention span"
+    ],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Raindrop", "Lychee Yakult"],
+    "leastCompatible": ["Matcha", "Beancurd"]
+  },
+
+  "ESFP": {
+    "name": "Rainbow Jelly",
+    "summary": "Sparkles, giggles, and good vibes only.",
+    "traits": [
+      "Playful, outgoing, full of life",
+      "Lives in the moment",
+      "Best hypeman",
+      "Sensitive under the sparkle",
+      "Can't stand being ignored"
+    ],
+    "strengths": [
+      "Makes life magical",
+      "Spontaneous and fun",
+      "Very optimistic"
+    ],
+    "weaknesses": ["Prioritizes harmony", "Needs attention", "Procrastinates"],
+    "stats": ["Sweetness", "Firmness", "Health Rating"],
+    "mostCompatible": ["Butterfly Pea", "Mango"],
+    "leastCompatible": ["Grass Jelly", "Caramel"]
+  }
+}
