@@ -1,43 +1,34 @@
 import React, { useState } from "react";
 import { useDeviceOrientation } from "./useDeviceOrientation";
 
-const OrientationInfo = (): React.ReactElement => {
+const OrientationInfo = () => {
   const { orientation, requestAccess, error } = useDeviceOrientation();
-  const [permissionRequested, setPermissionRequested] = useState(false);
+  const [requested, setRequested] = useState(false);
 
-  const handleRequestAccess = async () => {
+  const handleGesture = async () => {
+    if (requested) return;
     const granted = await requestAccess();
-    if (granted) {
-      setPermissionRequested(true);
-    }
+    setRequested(granted);
   };
 
-  const orientationInfo = orientation && (
-    <ul>
-      <li>
-        ɑ: <code>{orientation.alpha?.toFixed(2) ?? "N/A"}</code>
-      </li>
-      <li>
-        β: <code>{orientation.beta?.toFixed(2) ?? "N/A"}</code>
-      </li>
-      <li>
-        γ: <code>{orientation.gamma?.toFixed(2) ?? "N/A"}</code>
-      </li>
-    </ul>
-  );
-
-  const errorElement = error ? (
-    <div className="error">{error.message}</div>
-  ) : null;
-
   return (
-    <>
-      {!permissionRequested && !orientation && (
-        <button onClick={handleRequestAccess}>Request Gyroscope Access</button>
+    <div
+      onClick={handleGesture}
+      onTouchStart={handleGesture}
+      style={{ width: "100vw", height: "100vh" }}
+    >
+      {orientation ? (
+        <div>
+          <div>α: {orientation.alpha?.toFixed(2) ?? "N/A"}</div>
+          <div>β: {orientation.beta?.toFixed(2) ?? "N/A"}</div>
+          <div>γ: {orientation.gamma?.toFixed(2) ?? "N/A"}</div>
+        </div>
+      ) : (
+        <div>Tap anywhere to enable gyroscope</div>
       )}
-      {orientationInfo}
-      {errorElement}
-    </>
+
+      {error && <div className="error">{error.message}</div>}
+    </div>
   );
 };
 

@@ -15,7 +15,6 @@ const Home = () => {
           ballMax={10}
           containerPadding={16}
         />
-        <OrientationTesting />
       </div>
       <h1>What jelly are you?</h1>
       <p>Discover your true flavour</p>
@@ -23,6 +22,7 @@ const Home = () => {
       <Link to="/quiz" className="start-link" aria-label="Start quiz">
         Start
       </Link>
+      <OrientationTesting />
     </div>
   );
 };
