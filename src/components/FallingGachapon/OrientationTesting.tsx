@@ -1,30 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useDeviceOrientation } from "./useDeviceOrientation";
 
 const OrientationInfo = (): React.ReactElement => {
-  const { orientation, requestAccess, revokeAccess, error } =
-    useDeviceOrientation();
+  const { orientation, requestAccess, error } = useDeviceOrientation();
+  const [permissionRequested, setPermissionRequested] = useState(false);
 
-  // const onToggle = (toggleState: boolean): void => {
-  //   const result = toggleState ? requestAccess() : revokeAccess();
-  // };
-
-  useEffect(() => {
-    return () => {
-      requestAccess();
-    };
-  }, []);
+  const handleRequestAccess = async () => {
+    const granted = await requestAccess();
+    if (granted) {
+      setPermissionRequested(true);
+    }
+  };
 
   const orientationInfo = orientation && (
     <ul>
       <li>
-        ɑ: <code>{orientation.alpha}</code>
+        ɑ: <code>{orientation.alpha?.toFixed(2) ?? "N/A"}</code>
       </li>
       <li>
-        β: <code>{orientation.beta}</code>
+        β: <code>{orientation.beta?.toFixed(2) ?? "N/A"}</code>
       </li>
       <li>
-        γ: <code>{orientation.gamma}</code>
+        γ: <code>{orientation.gamma?.toFixed(2) ?? "N/A"}</code>
       </li>
     </ul>
   );
@@ -35,7 +32,9 @@ const OrientationInfo = (): React.ReactElement => {
 
   return (
     <>
-      {/* <Toggle onToggle={onToggle} /> */}
+      {!permissionRequested && !orientation && (
+        <button onClick={handleRequestAccess}>Request Gyroscope Access</button>
+      )}
       {orientationInfo}
       {errorElement}
     </>
