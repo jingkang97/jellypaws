@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import Matter from "matter-js";
 import "./FallingGachapon.css";
-import { Body as MatterBody, Bodies } from "matter-js";
+import { Body as MatterBody } from "matter-js";
 
 import type { IChamferableBodyDefinition } from "matter-js";
 
@@ -9,6 +9,7 @@ interface CircularBoundaryOptions extends IChamferableBodyDefinition {
   width?: number;
   extraLength?: number;
   initialRotation?: number;
+  sides?: number;
 }
 interface FallingGachaponProps {
   trigger?: "auto" | "scroll" | "click" | "hover";
@@ -58,16 +59,8 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
   useEffect(() => {
     if (!effectStarted) return;
 
-    const {
-      Engine,
-      Render,
-      World,
-      Bodies,
-      Runner,
-      Mouse,
-      MouseConstraint,
-      Body,
-    } = Matter;
+    const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } =
+      Matter;
 
     if (!containerRef.current || !canvasContainerRef.current) return;
 
@@ -80,6 +73,101 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     engine.positionIterations = 10;
     engine.velocityIterations = 8;
     engine.world.gravity.y = gravity;
+    engine.world.gravity.x = 0;
+
+    // Gyroscope/orientation support
+    let deviceOrientation: { beta: number; gamma: number } | null = null;
+    let orientationListenerAttached = false;
+
+    const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+      if (event.beta !== null && event.gamma !== null) {
+        deviceOrientation = {
+          beta: event.beta, // front-to-back tilt (-180 to 180)
+          gamma: event.gamma, // left-to-right tilt (-90 to 90)
+        };
+      }
+    };
+
+    // Function to request and setup device orientation
+    const setupDeviceOrientation = async () => {
+      if (orientationListenerAttached) return;
+
+      try {
+        // Request permission for iOS 13+ (must be called from user gesture)
+        if (
+          typeof DeviceOrientationEvent !== "undefined" &&
+          typeof (DeviceOrientationEvent as any).requestPermission ===
+            "function"
+        ) {
+          const response = await (
+            DeviceOrientationEvent as any
+          ).requestPermission();
+          if (response === "granted") {
+            window.addEventListener(
+              "deviceorientation",
+              handleDeviceOrientation
+            );
+            orientationListenerAttached = true;
+          }
+        } else if (typeof window !== "undefined") {
+          // Standard way for other browsers/devices
+          window.addEventListener("deviceorientation", handleDeviceOrientation);
+          orientationListenerAttached = true;
+        }
+      } catch (error) {
+        // Permission denied or API not available
+        console.debug("Device orientation not available:", error);
+      }
+    };
+
+    // Try to setup immediately (works on most Android devices)
+    setupDeviceOrientation();
+
+    // Also try on first user interaction (required for iOS)
+    const handleUserInteraction = () => {
+      setupDeviceOrientation();
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("touchstart", handleUserInteraction, {
+        once: true,
+      });
+      container.addEventListener("click", handleUserInteraction, {
+        once: true,
+      });
+    }
+
+    // Update gravity based on device orientation
+    const updateGravity = () => {
+      if (!deviceOrientation) return;
+
+      // Convert device orientation to gravity vector
+      // gamma: left(-90) to right(+90) -> affects x-axis
+      // beta: front(-180) to back(+180) -> affects y-axis
+
+      // Clamp gamma and beta to reasonable ranges
+      const clampedGamma = Math.max(-90, Math.min(90, deviceOrientation.gamma));
+      const clampedBeta = Math.max(-90, Math.min(90, deviceOrientation.beta));
+
+      // Convert to radians and map to gravity effect
+      const gammaRad = (clampedGamma * Math.PI) / 180;
+      const betaRad = (clampedBeta * Math.PI) / 180;
+
+      // Scale the effect - higher sensitivity for more dramatic response
+      // gamma controls horizontal tilt (x-axis gravity)
+      // beta controls vertical tilt (y-axis gravity adjustment)
+      const sensitivity = 0.8; // Increase for more sensitivity
+      engine.world.gravity.x = Math.sin(gammaRad) * gravity * sensitivity;
+      engine.world.gravity.y =
+        gravity * (1 + Math.sin(betaRad) * sensitivity * 0.5);
+    };
+
+    // Smooth gravity updates
+    let gravityUpdateInterval: number | null = null;
+    if (typeof window !== "undefined") {
+      gravityUpdateInterval = window.setInterval(updateGravity, 16); // ~60fps
+    }
 
     const render = Render.create({
       element: canvasContainerRef.current,
@@ -284,6 +372,24 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
 
     return () => {
       mounted = false;
+
+      // Clean up device orientation listeners
+      if (orientationListenerAttached) {
+        window.removeEventListener(
+          "deviceorientation",
+          handleDeviceOrientation
+        );
+      }
+      if (gravityUpdateInterval !== null) {
+        clearInterval(gravityUpdateInterval);
+      }
+
+      // Clean up user interaction listeners (they auto-remove with {once: true}, but ensure cleanup)
+      if (container) {
+        container.removeEventListener("touchstart", handleUserInteraction);
+        container.removeEventListener("click", handleUserInteraction);
+      }
+
       Render.stop(render);
       Runner.stop(runner);
       if (render.canvas && canvasContainerRef.current) {
