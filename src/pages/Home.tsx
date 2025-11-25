@@ -6,7 +6,7 @@ const Home = () => {
     <div className="home">
       <div style={{ height: "50vh", width: "100vw" }}>
         <FallingGachapon
-          trigger="hover"
+          trigger="auto"
           backgroundColor="tranredsparent"
           wireframes={false}
           gravity={0.5}

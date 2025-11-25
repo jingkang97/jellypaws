@@ -1,17 +1,44 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import resultsData from "../data/results.json";
+import questions from "../data/questions.json";
 
 type LocationState = { userAnswers?: string[] };
 
 const Results: React.FC = () => {
   const location = useLocation<LocationState>();
   const history = useHistory();
-  const userAnswers = location.state?.userAnswers ?? [];
+
+  // Try to get answers from route state first, fallback to localStorage
+  const stateAnswers = location.state?.userAnswers;
+  const storedAnswers = (() => {
+    try {
+      const stored = localStorage.getItem("jellypaws_quiz_answers");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        // Ensure it's an array of strings
+        return Array.isArray(parsed) ? (parsed as string[]) : null;
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  })();
+
+  const userAnswers: string[] = stateAnswers ?? storedAnswers ?? [];
+
+  // Redirect if quiz is not completed (no answers or incomplete)
+  useEffect(() => {
+    if (userAnswers.length === 0 || userAnswers.length !== questions.length) {
+      // Clear invalid stored data
+      localStorage.removeItem("jellypaws_quiz_answers");
+      history.replace("/");
+    }
+  }, [userAnswers.length, history]);
 
   const profile = useMemo(() => {
     const counts: Record<string, number> = {};
-    userAnswers.forEach((v) => {
+    userAnswers.forEach((v: string) => {
       const letter = String(v).toUpperCase();
       counts[letter] = (counts[letter] || 0) + 1;
     });
@@ -39,16 +66,9 @@ const Results: React.FC = () => {
     return { key: typeKey, entry };
   }, [userAnswers]);
 
-  if (userAnswers.length === 0) {
-    return (
-      <div style={{ padding: 20, textAlign: "center" }}>
-        <h2>We have no idea what jelly are you :(</h2>
-        <p>Please complete the quiz in its entirety first!</p>
-        <button type="button" onClick={() => history.push("/")}>
-          Back to home
-        </button>
-      </div>
-    );
+  // Show nothing while redirecting
+  if (userAnswers.length === 0 || userAnswers.length !== questions.length) {
+    return null;
   }
 
   const { key, entry } = profile;
