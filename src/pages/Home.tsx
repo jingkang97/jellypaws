@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import FallingGachapon from "../components/FallingGachapon/FallingGachapon";
-// import OrientationTesting from "../components/FallingGachapon/OrientationTesting";
+import OrientationTesting from "../components/FallingGachapon/OrientationTesting";
 
 const Home = () => {
   return (
@@ -15,7 +15,7 @@ const Home = () => {
           ballMax={10}
           containerPadding={16}
         />
-        {/* <OrientationTesting /> */}
+        <OrientationTesting />
       </div>
       <h1>What jelly are you?</h1>
       <p>Discover your true flavour</p>
