@@ -90,52 +90,117 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
 
     // Function to request and setup device orientation
     const setupDeviceOrientation = async () => {
-      if (orientationListenerAttached) return;
+      if (orientationListenerAttached) {
+        console.log("Device orientation already attached");
+        return;
+      }
 
       try {
-        // Request permission for iOS 13+ (must be called from user gesture)
-        if (
+        // Check if we need to request permission (iOS 13+)
+        const needsPermission =
           typeof DeviceOrientationEvent !== "undefined" &&
           typeof (DeviceOrientationEvent as any).requestPermission ===
-            "function"
-        ) {
-          const response = await (
-            DeviceOrientationEvent as any
-          ).requestPermission();
-          if (response === "granted") {
-            window.addEventListener(
-              "deviceorientation",
-              handleDeviceOrientation
-            );
-            orientationListenerAttached = true;
+            "function";
+
+        console.log(
+          "Setting up device orientation, needsPermission:",
+          needsPermission
+        );
+
+        if (needsPermission) {
+          // iOS 13+ - must request permission from user gesture
+          console.log("Requesting device orientation permission...");
+          try {
+            const response = await (
+              DeviceOrientationEvent as any
+            ).requestPermission();
+            console.log("Permission response:", response);
+
+            if (response === "granted") {
+              window.addEventListener(
+                "deviceorientation",
+                handleDeviceOrientation
+              );
+              orientationListenerAttached = true;
+              console.log(
+                "Device orientation permission granted and listener attached"
+              );
+            } else {
+              console.log("Permission denied or not granted:", response);
+              // Try to add listener anyway - sometimes it still works
+              window.addEventListener(
+                "deviceorientation",
+                handleDeviceOrientation
+              );
+              orientationListenerAttached = true;
+            }
+          } catch (error) {
+            console.error("Permission request failed:", error);
+            // Try to add listener anyway for testing
+            try {
+              window.addEventListener(
+                "deviceorientation",
+                handleDeviceOrientation
+              );
+              orientationListenerAttached = true;
+            } catch (e) {
+              console.error("Could not attach listener:", e);
+            }
           }
         } else if (typeof window !== "undefined") {
-          // Standard way for other browsers/devices
+          // Android and other browsers - no permission needed
+          console.log("No permission needed, attaching listener directly");
           window.addEventListener("deviceorientation", handleDeviceOrientation);
           orientationListenerAttached = true;
         }
       } catch (error) {
-        // Permission denied or API not available
-        console.debug("Device orientation not available:", error);
+        console.error("Device orientation setup error:", error);
       }
     };
 
-    // Try to setup immediately (works on most Android devices)
-    setupDeviceOrientation();
-
-    // Also try on first user interaction (required for iOS)
-    const handleUserInteraction = () => {
-      setupDeviceOrientation();
+    // Setup orientation on ANY user interaction with the component
+    // This ensures it works on iOS where permission must be requested from user gesture
+    const handleUserInteraction = async (e: Event) => {
+      // Don't prevent default - we want other interactions to work
+      await setupDeviceOrientation();
     };
 
+    // Try to setup on multiple interaction types
     const container = containerRef.current;
+    let setupOnTouch: (() => void) | null = null;
+    let setupOnClick: (() => void) | null = null;
+    
     if (container) {
-      container.addEventListener("touchstart", handleUserInteraction, {
-        once: true,
+      // Store handlers so we can remove them later
+      setupOnTouch = () => {
+        console.log("Touch interaction detected - requesting gyroscope permission");
+        handleUserInteraction();
+      };
+      setupOnClick = () => {
+        console.log("Click interaction detected - requesting gyroscope permission");
+        handleUserInteraction();
+      };
+
+      container.addEventListener("touchstart", setupOnTouch, {
+        capture: false,
+        once: false,
+        passive: true, // Make it passive so it doesn't block scrolling
       });
-      container.addEventListener("click", handleUserInteraction, {
-        once: true,
+      container.addEventListener("click", setupOnClick, {
+        capture: false,
+        once: false,
+        passive: true,
       });
+    }
+
+    // For non-iOS devices, try to setup immediately
+    const isIOS =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+    if (!isIOS) {
+      // Non-iOS devices don't need permission, so try immediately
+      setupDeviceOrientation();
     }
 
     // Update gravity based on device orientation
@@ -384,10 +449,10 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
         clearInterval(gravityUpdateInterval);
       }
 
-      // Clean up user interaction listeners (they auto-remove with {once: true}, but ensure cleanup)
-      if (container) {
-        container.removeEventListener("touchstart", handleUserInteraction);
-        container.removeEventListener("click", handleUserInteraction);
+      // Clean up user interaction listeners
+      if (container && setupOnTouch && setupOnClick) {
+        container.removeEventListener("touchstart", setupOnTouch);
+        container.removeEventListener("click", setupOnClick);
       }
 
       Render.stop(render);
