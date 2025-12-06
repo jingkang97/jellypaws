@@ -1,12 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap");
+
 /* Ensure a global sans-serif (Arial) font */
 html,
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: "DynaPuff", sans-serif;
+
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   color: #333;
-  background: transparent;
+  background: "#FDF5E2";
 }
 
 .content {
@@ -14,18 +18,25 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: "#FDF5E2";
+}
+
+.home {
+  background: "blue";
 }
 
 h1 {
   color: #333;
   text-align: center;
   margin-top: 20px;
+  font-size: 40px;
 }
 
 p {
   color: #666;
   text-align: center;
   margin: 10px 0;
+  font-size: 20px;
 }
 
 button {
@@ -36,7 +47,7 @@ button {
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 50%;
   cursor: pointer;
   font-family: inherit;
 }
@@ -129,15 +140,18 @@ button:hover {
 .home .start-link {
   text-decoration: none; /* remove underline */
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 5px;
+  padding: 10px 30px;
+  background-color: #a5c75f;
+  color: #000;
+  border-radius: 40px;
   margin-top: 16px;
   font-family: inherit;
+  font-size: 30px;
+  font-weight: bold;
   cursor: pointer;
   border: none;
   text-align: center;
+  border: 6px solid #000;
 }
 
 .home .start-link:hover,
