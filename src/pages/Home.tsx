@@ -27,7 +27,7 @@ const Home = () => {
             trigger="auto"
             backgroundColor="transparent"
             wireframes={false}
-            gravity={0.56}
+            gravity={0.9}
             mouseConstraintStiffness={0.9}
             containerPadding={16}
           />
