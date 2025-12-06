@@ -133,7 +133,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     const avgRadius = Math.max(
       40, // Minimum radius (80px diameter)
       Math.min(
-        120, // Maximum radius (240px diameter)
+        80, // Maximum radius (240px diameter)
         Math.min(width, height) * 0.15 // 15% of the smaller dimension
       )
     );
