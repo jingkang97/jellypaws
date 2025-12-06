@@ -91,6 +91,10 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
           isStatic: true,
           render: { visible: false },
         }),
+        Bodies.rectangle(w / 2, wallThickness / 2, w, wallThickness, {
+          isStatic: true,
+          render: { visible: false },
+        }),
         // Bottom wall
         Bodies.rectangle(w / 2, h - wallThickness / 2, w, wallThickness, {
           isStatic: true,
@@ -103,7 +107,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
 
     // --- Create balls ---
     const palette = ["blue.png", "green.png", "pink.png", "yellow.png"];
-    const ballCount = 18;
+    const ballCount = 15;
 
     // Ensure uniform distribution of colors
     const colorCount = palette.length;
