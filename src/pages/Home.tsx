@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="home">
       {/* Gachapon background if needed */}
-      {/* <div className="gacha-bg">
+      <div className="gachapon-bg">
         <FallingGachapon
           trigger="auto"
           backgroundColor="transparent"
@@ -17,7 +17,7 @@ const Home = () => {
           mouseConstraintStiffness={0.9}
           containerPadding={16}
         />
-      </div> */}
+      </div>
 
       <div className="home-content">
         <CircularText

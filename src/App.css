@@ -38,6 +38,11 @@ body {
   gap: 8px;
 }
 
+.home-content {
+  position: relative;
+  z-index: 10; /* higher than gachapon-bg */
+}
+
 h1 {
   color: #333;
   margin-top: 20px;
@@ -131,4 +136,16 @@ button:hover {
   display: block;
   max-width: 100%;
   margin: 0 auto 16px;
+}
+
+.gachapon-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none; /* <-- allow clicks to pass through */
+  overflow: hidden;
+}
+
+.gachapon-bg canvas {
+  pointer-events: auto; /* <-- only canvas is interactive (balls can be dragged) */
 }

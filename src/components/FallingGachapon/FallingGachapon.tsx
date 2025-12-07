@@ -84,22 +84,22 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
         // Left wall (from top to bottom)
         Bodies.rectangle(wallThickness / 2, h / 2, wallThickness, h + 100, {
           isStatic: true,
-          render: { visible: true },
+          render: { visible: false },
         }),
         // Right wall (from top to bottom)
         Bodies.rectangle(w - wallThickness / 2, h / 2, wallThickness, h + 100, {
           isStatic: true,
-          render: { visible: true },
+          render: { visible: false },
         }),
         // Top wall (centered)
         Bodies.rectangle(w / 2, wallThickness / 2, w + 100, wallThickness, {
           isStatic: true,
-          render: { visible: true },
+          render: { visible: false },
         }),
         // Bottom wall (centered)
         Bodies.rectangle(w / 2, h - wallThickness / 2, w + 100, wallThickness, {
           isStatic: true,
-          render: { visible: true },
+          render: { visible: false },
         }),
       ];
     };
