@@ -2,11 +2,16 @@
   position: relative;
   z-index: 1;
   height: 100%;
+  width: 100%;
   text-align: center;
-  /* width: 100%; */
-  aspect-ratio: 9 / 16;
-  margin: 0 auto; /* center horizontally */
-  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .falling-text-container {
+    width: auto;
+    aspect-ratio: 9 / 16;
+    margin: 0 auto; /* center horizontally */
+  }
 }
 
 .word {
