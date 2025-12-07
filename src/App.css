@@ -40,6 +40,7 @@ body {
 
 .home-content {
   position: relative;
+  pointer-events: none; /* allow interaction */
   z-index: 10; /* higher than gachapon-bg */
 }
 
@@ -69,6 +70,7 @@ button {
   font-family: inherit;
   border: 6px solid #000;
   font-weight: bold;
+  pointer-events: auto; /* enable interaction */
 }
 
 button:hover {

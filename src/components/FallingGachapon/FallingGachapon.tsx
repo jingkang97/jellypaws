@@ -16,7 +16,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
   backgroundColor = "transparent",
   wireframes = false,
   gravity = 0.56,
-  mouseConstraintStiffness = 0.9,
+  mouseConstraintStiffness = 0.01,
   containerPadding = 2,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -60,7 +60,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     const engine = Engine.create();
     engine.positionIterations = 10;
     engine.velocityIterations = 8;
-    engine.world.gravity.y = gravity;
+    engine.gravity.y = gravity;
 
     const render = Render.create({
       element: canvasContainerRef.current,
@@ -279,12 +279,6 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
       className="falling-text-container"
       onClick={trigger === "click" ? handleTrigger : undefined}
       onMouseEnter={trigger === "hover" ? handleTrigger : undefined}
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        width: "100%",
-        height: "100%",
-      }}
     >
       <div ref={canvasContainerRef} className="falling-text-canvas" />
     </div>
