@@ -74,7 +74,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     });
 
     // Create walls: left, right, and bottom
-    const wallThickness = 20;
+    const wallThickness = 10;
 
     // Create walls array (mutable for resize)
     let walls: MatterBody[] = [];
@@ -82,23 +82,24 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     const createWalls = (w: number, h: number): MatterBody[] => {
       return [
         // Left wall (from top to bottom)
-        Bodies.rectangle(wallThickness / 2, h / 2, wallThickness, h, {
+        Bodies.rectangle(wallThickness / 2, h / 2, wallThickness, h + 100, {
           isStatic: true,
-          render: { visible: false },
+          render: { visible: true },
         }),
         // Right wall (from top to bottom)
-        Bodies.rectangle(w - wallThickness / 2, h / 2, wallThickness, h, {
+        Bodies.rectangle(w - wallThickness / 2, h / 2, wallThickness, h + 100, {
           isStatic: true,
-          render: { visible: false },
+          render: { visible: true },
         }),
-        Bodies.rectangle(w / 2, wallThickness / 2, w, wallThickness, {
+        // Top wall (centered)
+        Bodies.rectangle(w / 2, wallThickness / 2, w + 100, wallThickness, {
           isStatic: true,
-          render: { visible: false },
+          render: { visible: true },
         }),
-        // Bottom wall
-        Bodies.rectangle(w / 2, h - wallThickness / 2, w, wallThickness, {
+        // Bottom wall (centered)
+        Bodies.rectangle(w / 2, h - wallThickness / 2, w + 100, wallThickness, {
           isStatic: true,
-          render: { visible: false },
+          render: { visible: true },
         }),
       ];
     };
@@ -137,7 +138,7 @@ const FallingGachapon: React.FC<FallingGachaponProps> = ({
     const avgRadius = Math.max(
       40, // Minimum radius (80px diameter)
       Math.min(
-        60, // Maximum radius (240px diameter)
+        40, // Maximum radius (240px diameter)
         Math.min(width, height) * 0.15 // 15% of the smaller dimension
       )
     );
