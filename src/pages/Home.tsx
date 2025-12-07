@@ -14,7 +14,7 @@ const Home = () => {
       }}
     >
       {/* BACKGROUND GACHAPON - Interactive but behind other elements */}
-      <div
+      {/* <div
         style={{
           position: "absolute",
           inset: 0,
@@ -29,7 +29,7 @@ const Home = () => {
           mouseConstraintStiffness={0.9}
           containerPadding={16}
         />
-      </div>
+      </div> */}
 
       {/* FRONT CIRCULAR TEXT */}
       <div
