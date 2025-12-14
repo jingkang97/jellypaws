@@ -1,8 +1,7 @@
 import Marquee from "react-fast-marquee";
 
 const ConveyorBelt = () => {
-  const wheels = Array(20).fill(0); // adjust number for full width
-
+  const wheels = Array(20).fill(0);
   return (
     <div>
       <div style={{ height: "200px", width: "100vw", background: "" }}>
