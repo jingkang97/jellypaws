@@ -4,7 +4,13 @@ const ConveyorBelt = () => {
   const wheels = Array(20).fill(0);
   return (
     <div>
-      <div style={{ height: "200px", width: "100vw", background: "" }}>
+      <div
+        style={{
+          height: "200px",
+          width: "100vw",
+          background: "",
+        }}
+      >
         <div
           style={{
             position: "relative",
@@ -12,7 +18,7 @@ const ConveyorBelt = () => {
         >
           {/* Belt (background) */}
           <Marquee
-            speed={200}
+            speed={100}
             direction="right"
             autoFill
             style={{
@@ -43,7 +49,7 @@ const ConveyorBelt = () => {
 
           {/* Plates (foreground) */}
           <Marquee
-            speed={200}
+            speed={100}
             direction="right"
             autoFill
             style={{
