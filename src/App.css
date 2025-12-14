@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Gluten:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&family=Cherry+Bomb+One&family=Gluten:wght@100..900&family=Quicksand:wght@300..700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -10,7 +10,7 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  background: #fdf5e2;
+  background: #effaff;
   height: 100%;
 }
 
@@ -20,7 +20,16 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #fdf5e2;
+  background: #effaff;
+}
+
+.jelly-outer {
+  display: flex;
+  align-items: center;
+}
+
+.jelly-inner {
+  will-change: transform;
 }
 
 /* HOME PAGE */
@@ -32,7 +41,7 @@ body {
   text-align: center;
   width: 100%;
   height: 100vh;
-  background: #fdf5e2;
+  background: #effaff;
   position: relative;
   padding: 20px;
   gap: 8px;
@@ -40,20 +49,18 @@ body {
 
 .home-content {
   position: relative;
-  pointer-events: none; /* allow interaction */
   z-index: 10; /* higher than gachapon-bg */
 }
 
 h1 {
   color: #333;
-  margin-top: 20px;
-  font-size: 40px;
+  font-size: 3rem;
 }
 
 p,
 .subtitle {
   color: #666;
-  font-size: 20px;
+  font-size: 2rem;
   text-align: center;
 }
 
@@ -62,13 +69,13 @@ button {
   display: block;
   margin: 20px auto 0;
   padding: 10px 30px;
-  font-size: 20px;
+  font-size: 2rem;
   background-color: #a5c75f;
   color: #000;
   border-radius: 40px;
   cursor: pointer;
   font-family: inherit;
-  border: 6px solid #000;
+  border: 4px solid #000;
   font-weight: bold;
   pointer-events: auto; /* enable interaction */
 }
@@ -138,16 +145,4 @@ button:hover {
   display: block;
   max-width: 100%;
   margin: 0 auto 16px;
-}
-
-.gachapon-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none; /* <-- allow clicks to pass through */
-  overflow: hidden;
-}
-
-.gachapon-bg canvas {
-  pointer-events: auto; /* <-- only canvas is interactive (balls can be dragged) */
 }

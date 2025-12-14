@@ -1,34 +1,18 @@
 import { useHistory } from "react-router-dom";
-import FallingGachapon from "../components/FallingGachapon/FallingGachapon";
-import CircularText from "../components/CircularText/CircularText";
+import ConveyorBelt from "../components/ConveyorBelt";
 
 const Home = () => {
   const history = useHistory();
 
   return (
     <div className="home">
-      {/* Gachapon background if needed */}
-      <div className="gachapon-bg">
-        <FallingGachapon
-          trigger="auto"
-          backgroundColor="transparent"
-          wireframes={false}
-          gravity={0.9}
-          mouseConstraintStiffness={0.9}
-          containerPadding={16}
-        />
-      </div>
-
       <div className="home-content">
-        <CircularText
-          centerImage="./favicon.png"
-          text="JELLY*PAWS*JELLY*PAWS*"
-        />
-
+        <div>
+          <img style={{ height: "200px" }} src="/logo.png" alt="Jelly Icon" />
+        </div>
         <h1>What jelly are you?</h1>
-
         <p className="subtitle">Discover your true flavour</p>
-
+        <ConveyorBelt />
         <button type="button" onClick={() => history.push("/quiz")}>
           Start
         </button>
