@@ -1,15 +1,17 @@
 .falling-text-container {
   position: relative;
   z-index: 1;
-  width: 100%;
   height: 100%;
-  cursor: pointer;
+  width: 100%;
   text-align: center;
-  padding-top: 2em;
 }
 
-.falling-text-target {
-  display: inline-block;
+@media (min-width: 1024px) {
+  .falling-text-container {
+    width: auto;
+    aspect-ratio: 9 / 16;
+    margin: 0 auto; /* center horizontally */
+  }
 }
 
 .word {
@@ -19,14 +21,9 @@
   color: black;
 }
 
-.highlighted {
-  color: cyan;
-  font-weight: bold;
-}
-
 .falling-text-canvas {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 0;
+  /* z-index: 0; */
 }

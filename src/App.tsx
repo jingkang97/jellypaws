@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Quiz from "./pages/Quiz";
 import Results from "./pages/Results";
-import "./styles/App.css";
+import "./App.css";
 
 const App = () => {
   return (

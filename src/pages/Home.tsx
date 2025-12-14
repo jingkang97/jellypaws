@@ -1,28 +1,38 @@
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import FallingGachapon from "../components/FallingGachapon/FallingGachapon";
-import OrientationTesting from "../components/FallingGachapon/OrientationTesting";
+import CircularText from "../components/CircularText/CircularText";
 
 const Home = () => {
+  const history = useHistory();
+
   return (
     <div className="home">
-      <div style={{ height: "50vh", width: "100vw" }}>
+      {/* Gachapon background if needed */}
+      <div className="gachapon-bg">
         <FallingGachapon
           trigger="auto"
-          backgroundColor="tranredsparent"
+          backgroundColor="transparent"
           wireframes={false}
-          gravity={0.5}
+          gravity={0.9}
           mouseConstraintStiffness={0.9}
-          ballMax={10}
           containerPadding={16}
         />
       </div>
-      <h1>What jelly are you?</h1>
-      <p>Discover your true flavour</p>
 
-      <Link to="/quiz" className="start-link" aria-label="Start quiz">
-        Start
-      </Link>
-      <OrientationTesting />
+      <div className="home-content">
+        <CircularText
+          centerImage="./favicon.png"
+          text="JELLY*PAWS*JELLY*PAWS*"
+        />
+
+        <h1>What jelly are you?</h1>
+
+        <p className="subtitle">Discover your true flavour</p>
+
+        <button type="button" onClick={() => history.push("/quiz")}>
+          Start
+        </button>
+      </div>
     </div>
   );
 };
