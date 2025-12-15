@@ -69,6 +69,7 @@ button {
   display: block;
   margin: 20px auto 0;
   padding: 10px 30px;
+  padding-bottom: 15px;
   font-size: 2rem;
   background-color: #a5c75f;
   color: #000;
@@ -145,4 +146,87 @@ button:hover {
   display: block;
   max-width: 100%;
   margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.wheel-spin {
+  animation: spin 4.2s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes pulseFade {
+  /* ORIGINAL COLOR (no glow) */
+  0% {
+    color: #645f59;
+    text-shadow: none;
+  }
+
+  /* FADE TO WHITE + GLOW */
+  40% {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9),
+      0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(255, 255, 255, 0.6);
+  }
+
+  /* HOLD WHITE + GLOW */
+  60% {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9),
+      0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(255, 255, 255, 0.6);
+  }
+
+  /* BACK TO ORIGINAL */
+  100% {
+    color: #645f59;
+    text-shadow: none;
+  }
+}
+
+.pulse {
+  display: inline-block;
+  animation: pulseFade 5s ease-in-out infinite;
+}
+
+@keyframes jellyJiggle {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  8% {
+    transform: translate(-1px, 0.5px) rotate(-0.3deg);
+  }
+  16% {
+    transform: translate(1.2px, -0.3px) rotate(0.4deg);
+  }
+  27% {
+    transform: translate(-0.6px, 0.8px) rotate(-0.2deg);
+  }
+  38% {
+    transform: translate(0.9px, -0.6px) rotate(0.3deg);
+  }
+  52% {
+    transform: translate(-1.1px, 0.4px) rotate(-0.4deg);
+  }
+  68% {
+    transform: translate(0.6px, -0.5px) rotate(0.2deg);
+  }
+  83% {
+    transform: translate(-0.4px, 0.6px) rotate(-0.1deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+.jelly-jiggle {
+  animation: jellyJiggle 2.8s ease-in-out infinite;
+  animation-delay: calc(var(--jiggle-delay) * -1s);
+  will-change: transform;
 }

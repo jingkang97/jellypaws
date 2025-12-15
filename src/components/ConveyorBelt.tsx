@@ -1,14 +1,14 @@
 import Marquee from "react-fast-marquee";
 
 const ConveyorBelt = () => {
-  const wheels = Array(20).fill(0);
+  const wheels = Array(10).fill(0);
   return (
     <div>
       <div
         style={{
           height: "200px",
           width: "100vw",
-          //   background: "red",
+          background: "black",
         }}
       >
         <div
@@ -21,6 +21,8 @@ const ConveyorBelt = () => {
             speed={100}
             direction="right"
             autoFill
+            gradient={true}
+            gradientColor="#effaff"
             style={{
               position: "absolute",
               top: 0,
@@ -37,14 +39,13 @@ const ConveyorBelt = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "#FEF4E3",
-                color: "#EDDDC7",
+                background: "#86827F",
                 fontFamily: "Quicksand, sans-serif",
-                borderBottom: "5px solid #E6CBA8",
+                borderBottom: "5px solid #645F59",
                 fontWeight: "900",
               }}
             >
-              &gt;
+              <span className="pulse">&gt;</span>
             </div>
           </Marquee>
 
@@ -53,6 +54,9 @@ const ConveyorBelt = () => {
             speed={100}
             direction="right"
             autoFill
+            gradient={true}
+            gradientColor="#effaff"
+            gradientWidth={"50px"}
             style={{
               position: "absolute",
               top: "-70px", // lift plates above belt
@@ -62,20 +66,24 @@ const ConveyorBelt = () => {
             }}
           >
             <img
+              className="jelly-jiggle"
               src="/conveyor-jellies/plate1.png"
               style={{
                 height: "200px",
                 filter: "drop-shadow(0 10px 4px rgba(0,0,0,0.35))",
                 marginRight: "50px",
                 marginLeft: "50px",
+                ["--jiggle-delay" as any]: `${Math.random() * 3}s`,
               }}
               alt="Plate"
             />
             <img
+              className="jelly-jiggle"
               src="/conveyor-jellies/plate2.png"
               style={{
                 height: "200px",
-                filter: "drop-shadow(0 6px 4px rgba(0,0,0,0.15))",
+                filter: "drop-shadow(0 10px 4px rgba(0,0,0,0.35))",
+                ["--jiggle-delay" as any]: `${Math.random() * 3}s`,
               }}
               alt="Plate"
             />
@@ -85,20 +93,21 @@ const ConveyorBelt = () => {
       <div
         style={{
           marginTop: "0px", // slightly overlap belt bottom
-          //   zIndex: 3,
-          height: "80px",
+          height: "100px",
           width: "100vw",
           overflow: "hidden",
-          borderTop: "5px solid #000000",
-          borderBottom: "5px solid #000000",
+          borderTop: "10px solid #544F63",
+          borderBottom: "10px solid #544F63",
           display: "flex",
+          justifyContent: "space-between",
           alignItems: "center",
         }}
       >
         {wheels.map((_, i) => (
           <img
             key={i}
-            src="/wheel.png"
+            className="wheel-spin"
+            src="/wheel_v2.png"
             style={{ height: "100px", marginRight: "70px" }}
             alt="Wheel"
           />

@@ -14,7 +14,7 @@ const Home = () => {
         <p className="subtitle">Discover your true flavour</p>
         <ConveyorBelt />
         <button type="button" onClick={() => history.push("/quiz")}>
-          Start
+          Enter
         </button>
       </div>
     </div>
