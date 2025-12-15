@@ -8,7 +8,7 @@ const ConveyorBelt = () => {
         style={{
           height: "200px",
           width: "100vw",
-          background: "red",
+          //   background: "red",
         }}
       >
         <div
