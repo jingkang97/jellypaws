@@ -45,7 +45,7 @@ const ConveyorBelt = () => {
                 fontWeight: "900",
               }}
             >
-              <span className="pulse">&gt;</span>
+              &gt;
             </div>
           </Marquee>
 

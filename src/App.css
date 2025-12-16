@@ -162,39 +162,6 @@ button:hover {
   transform-origin: center;
 }
 
-@keyframes pulseFade {
-  /* ORIGINAL COLOR (no glow) */
-  0% {
-    color: #645f59;
-    text-shadow: none;
-  }
-
-  /* FADE TO WHITE + GLOW */
-  40% {
-    color: #ffffff;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9),
-      0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(255, 255, 255, 0.6);
-  }
-
-  /* HOLD WHITE + GLOW */
-  60% {
-    color: #ffffff;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9),
-      0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(255, 255, 255, 0.6);
-  }
-
-  /* BACK TO ORIGINAL */
-  100% {
-    color: #645f59;
-    text-shadow: none;
-  }
-}
-
-.pulse {
-  display: inline-block;
-  animation: pulseFade 5s ease-in-out infinite;
-}
-
 @keyframes jellyJiggle {
   0% {
     transform: translate(0, 0) rotate(0deg);
